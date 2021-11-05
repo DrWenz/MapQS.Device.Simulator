@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="MapQS.Device.Simulator/App.axaml" value="MapQS.Device.Simulator/MapQS.Device.Simulator.csproj" />
+        <entry key="MapQS.Device.Simulator/MainWindow.axaml" value="MapQS.Device.Simulator/MapQS.Device.Simulator.csproj" />
+        <entry key="MapQS.Device.Simulator/Theme/Controls/Buttons.axaml" value="MapQS.Device.Simulator/MapQS.Device.Simulator.csproj" />
+        <entry key="MapQS.Device.Simulator/Views/Mixer.axaml" value="MapQS.Device.Simulator/MapQS.Device.Simulator.csproj" />
+        <entry key="MapQS.Device.Simulator/Views/MixerView.axaml" value="MapQS.Device.Simulator/MapQS.Device.Simulator.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

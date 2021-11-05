@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="10.33.76.139" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="10.33.76.139">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/MapQS.Device.Simulator.sln" web="/" />
+            <mapping local="$PROJECT_DIR$/MapQS.Device.Simulator/.gitignore" web="/" />
+            <mapping local="$PROJECT_DIR$/MapQS.Device.Simulator/App.axaml" web="/" />
+            <mapping local="$PROJECT_DIR$/MapQS.Device.Simulator/App.axaml.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/MapQS.Device.Simulator/MainWindow.axaml" web="/" />
+            <mapping local="$PROJECT_DIR$/MapQS.Device.Simulator/MainWindow.axaml.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/MapQS.Device.Simulator/MapQS.Device.Simulator.csproj" web="/" />
+            <mapping local="$PROJECT_DIR$/MapQS.Device.Simulator/Program.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/MapQS.Device.Simulator/obj/Debug/net5.0/Avalonia/resources" web="/" />
+            <mapping local="$PROJECT_DIR$/MapQS.Device.Simulator/obj/Debug/net5.0/MapQS.Device.Simulator.AssemblyInfo.cs" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
