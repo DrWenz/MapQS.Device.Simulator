@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        mc:Ignorable="d"
+        MaxHeight="720"
+        MaxWidth="1280"
+        d:DesignHeight="720"
+        d:DesignWidth="720"
+        x:Class="MapQS.Device.Simulator.MainWindow"
+        Title="MapQS.Device.Simulator"
+        WindowState="Maximized">
+    <Grid RowDefinitions="80, 1*"
+          Background="#f9f9f9"
+          HorizontalAlignment="Stretch">
+        <Border Background="White"
+                BoxShadow="0 0 15 10 #0D22292F"
+                Padding="10,0,10,0">
+            <Panel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Classes="IconButton">
+                        <avalonia:MaterialIcon Kind="Home"
+                                               Width="45"
+                                               Height="45"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left" />
+                    </Button>
+                    <TextBlock Text="Gasmischer"
+                               Margin="10,0,0,0"
+                               FontSize="26"
+                               FontWeight="Medium"
+                               Foreground="#153e6b"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <TextBlock Text="MapQS Simulator"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           FontSize="26"
+                           Foreground="#625f6e" />
+            </Panel>
+        </Border>
+    </Grid>
+</Window>
