@@ -3,6 +3,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        xmlns:viewModels="clr-namespace:MapQS.Device.Simulator.ViewModels"
+        xmlns:core="clr-namespace:MapQS.Device.Simulator.Core"
         mc:Ignorable="d"
         MaxHeight="720"
         MaxWidth="1280"
@@ -10,7 +12,13 @@
         d:DesignWidth="720"
         x:Class="MapQS.Device.Simulator.MainWindow"
         Title="MapQS.Device.Simulator"
-        WindowState="Maximized">
+        WindowState="FullScreen"
+        Cursor="None">
+
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel />
+    </Window.DataContext>
+
     <Grid RowDefinitions="80, 1*"
           Background="#f9f9f9"
           HorizontalAlignment="Stretch">
@@ -19,27 +27,34 @@
                 Padding="10,0,10,0">
             <Panel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Classes="IconButton">
+                    <Button Classes="IconButton"
+                            IsVisible="{Binding Source={x:Static core:Navigation.Navigator}, Path=!IsHome}"
+                            Command="{Binding Source={x:Static core:Navigation.Navigator}, Path=GoToHome}">
                         <avalonia:MaterialIcon Kind="Home"
-                                               Width="45"
-                                               Height="45"
+                                               Width="30"
+                                               Height="30"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Left" />
                     </Button>
-                    <TextBlock Text="Gasmischer"
+                    <TextBlock Text="{Binding Source={x:Static core:Navigation.Navigator}, Path=Header}"
                                Margin="10,0,0,0"
                                FontSize="26"
                                FontWeight="Medium"
-                               Foreground="#153e6b"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" />
                 </StackPanel>
 
-                <TextBlock Text="MapQS Simulator"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Right"
-                           FontSize="26"
-                           Foreground="#625f6e" />
+                <Button Classes="None"
+                        Command="{Binding Close}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right">
+                    <TextBlock Text="MapQS Simulator"
+                               FontSize="26"
+                               Foreground="#625f6e" />
+                </Button>
+
             </Panel>
         </Border>
+        <ContentPresenter Grid.Row="1"
+                          Content="{Binding Source={x:Static core:Navigation.Navigator}, Path=Page}" />
     </Grid>
 </Window>

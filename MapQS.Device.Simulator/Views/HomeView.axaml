@@ -1,0 +1,123 @@
+<controls:Page xmlns="https://github.com/avaloniaui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               xmlns:controls="clr-namespace:MapQS.Device.Simulator.Core.Controls"
+               xmlns:core="clr-namespace:MapQS.Device.Simulator.Core"
+               mc:Ignorable="d"
+               d:DesignWidth="800"
+               d:DesignHeight="450"
+               x:Class="MapQS.Device.Simulator.Views.HomeView">
+
+    <controls:Page.Styles>
+        <Style Selector="Button.Card">
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="Width"
+                    Value="320" />
+            <Setter Property="Height"
+                    Value="320" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter x:Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      Background="Transparent"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      RecognizesAccessKey="True"
+                                      HorizontalContentAlignment="Center"
+                                      VerticalContentAlignment="Center" />
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="Button.Card > Border">
+            <Setter Property="Background"
+                    Value="White" />
+            <Setter Property="CornerRadius"
+                    Value="20" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+            <Setter Property="Width"
+                    Value="225" />
+            <Setter Property="Height"
+                    Value="225" />
+            <Setter Property="BoxShadow"
+                    Value="0 0 15 10 #0D22292F" />
+            <Setter Property="Cursor"
+                    Value="Hand" />
+            <Setter Property="RenderTransform"
+                    Value="none" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform"
+                                                   Duration="0:0:.075" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.Card > Border > Grid > TextBlock">
+            <Setter Property="Grid.Row"
+                    Value="1" />
+            <Setter Property="FontWeight"
+                    Value="Medium" />
+            <Setter Property="FontSize"
+                    Value="17" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+        <Style Selector="Button.Card > Border > Grid > Image">
+            <Setter Property="Grid.Row"
+                    Value="0" />
+            <Setter Property="Margin"
+                    Value="10" />
+        </Style>
+        <Style Selector="Button.Card:pointerover">
+            <Setter Property="RenderTransform"
+                    Value="scale(0.98)" />
+        </Style>
+        <Style Selector="Button.Card:pressed">
+            <Setter Property="RenderTransform"
+                    Value="scale(0.95)" />
+        </Style>
+    </controls:Page.Styles>
+
+    <WrapPanel>
+        <Button Classes="Card"
+                Command="{Binding Source={x:Static core:Navigation.Navigator}, Path=GoToGasMixer}">
+            <Border>
+                <Grid RowDefinitions="1*, 30">
+                    <Image Source="/Assets/witt_gasmixer.png" />
+                    <TextBlock Text="Gasmischer" />
+                </Grid>
+            </Border>
+        </Button>
+
+        <Button Classes="Card"
+                Command="{Binding Source={x:Static core:Navigation.Navigator}, Path=GoToGasAnalyser}">
+            <Border>
+                <Grid RowDefinitions="1*, 30">
+                    <Image Source="/Assets/witt_mapy.png" />
+                    <TextBlock Text="Gasanalyse" />
+                </Grid>
+            </Border>
+        </Button>
+        <Button Classes="Card">
+            <Border>
+                <Grid RowDefinitions="1*, 30">
+                    <Image Source="/Assets/witt_mapmax.png" />
+                    <TextBlock Text="Dichtheitsprüfung" />
+                </Grid>
+            </Border>
+        </Button>
+        <Button Classes="Card">
+            <Border>
+                <Grid RowDefinitions="1*, 30">
+                    <Image Source="/Assets/witt_dom.png" />
+                    <TextBlock Text="Domdruckregler" />
+                </Grid>
+            </Border>
+        </Button>
+    </WrapPanel>
+</controls:Page>

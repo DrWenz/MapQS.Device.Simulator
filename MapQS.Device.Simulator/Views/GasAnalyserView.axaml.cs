@@ -1,16 +1,15 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using MapQS.Device.Simulator.Core;
-using MapQS.Device.Simulator.ViewModels;
+using MapQS.Device.Simulator.Core.Controls;
 
-namespace MapQS.Device.Simulator
+namespace MapQS.Device.Simulator.Views
 {
-    public class MainWindow : Window
+    public class GasAnalyserView : Page
     {
-        public MainWindow()
+        public GasAnalyserView()
         {
             InitializeComponent();
-            Navigation.Navigator.GoToHome();
         }
 
         private void InitializeComponent()

@@ -5,5 +5,6 @@
         <FluentTheme Mode="Light" />
         <StyleInclude Source="avares://Material.Icons.Avalonia/App.xaml" />
         <StyleInclude Source="/Theme/Controls/Buttons.axaml" />
+        <StyleInclude Source="/Theme/Controls/Slider.axaml" />
     </Application.Styles>
 </Application>

@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using MapQS.Device.Simulator.Core;
 
 namespace MapQS.Device.Simulator
 {

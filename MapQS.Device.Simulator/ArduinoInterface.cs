@@ -14,8 +14,8 @@ namespace MapQS.Device.Simulator
 #else
             _bus = I2cBus.Create(10);
             _device = I2cDevice.Create(new I2cConnectionSettings(10, 4));
-            _init = true;
 #endif
+            _init = true;
         }
 
         public void Start()
@@ -34,69 +34,121 @@ namespace MapQS.Device.Simulator
         {
             while (_running)
             {
-                if (!_dataChanged)
+                try
                 {
-                    await Task.Delay(125);
-                    continue;
-                }
+                    if (!_dataChanged)
+                    {
+                        await Task.Delay(125);
+                        continue;
+                    }
+
+                    var c1 = ConvertToAnalogValue(_channel1, Channel1Min, Channel1Max);
+                    var c2 = ConvertToAnalogValue(_channel2, Channel2Min, Channel2Max);
+                    var c3 = ConvertToAnalogValue(_channel3, Channel3Min, Channel3Max);
+                    var c4 = ConvertToAnalogValue(_channel4, Channel4Min, Channel5Max);
+                    var c5 = ConvertToAnalogValue(_channel5, Channel4Min, Channel5Max);
+                    var c6 = ConvertToAnalogValue(_channel6, _channel6Min, _channel6Max);
 #if DEBUG
-                Console.WriteLine(
-                    $"C1:{Channel1} C2: {Channel2} C3: {Channel3} C4: {Channel4} C5: {Channel5} C6: {Channel6}");
-                _dataChanged = false;
+                    Console.WriteLine(
+                        $"C1:{c2} C2: {c2} C3: {c3} C4: {c4} C5: {c5} C6: {c6}");
+                    _dataChanged = false;
 #else
                 _device.Write(new[]
                 {
                     (byte)0x01,
-                    (byte)Channel1,
-                    (byte)Channel2,
-                    (byte)Channel3,
-                    (byte)Channel4,
-                    (byte)Channel5,
-                    (byte)Channel6,
+                    (byte)c1,
+                    (byte)c2,
+                    (byte)c3,
+                    (byte)c4,
+                    (byte)c5,
+                    (byte)c6,
                     (byte)0x04
                 });
                 _dataChanged = false;
 #endif
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
                 await Task.Delay(125);
             }
         }
 
-        public void UpdateValues(int c1, int c2, int c3, int c4, int c5, int c6)
+        private int ConvertToAnalogValue(double value, double min, double max)
+        {
+            var res = (value - min) * (AnalogMaxValue - AnalogMinValue) / (max - min) + AnalogMinValue;
+            return (int)Math.Round(res, 0);
+        }
+
+        public void UpdateValues(double c1, double c2, double c3, double c4, double c5, double c6)
         {
             if (!_running)
                 Start();
 
-            SetChannelValue(ref _channel1, c1);
-            SetChannelValue(ref _channel2, c2);
-            SetChannelValue(ref _channel3, c3);
-            SetChannelValue(ref _channel4, c4);
-            SetChannelValue(ref _channel5, c5);
-            SetChannelValue(ref _channel6, c6);
+            SetChannelValue(ref _channel1, Channel1Min, Channel1Max, c1);
+            SetChannelValue(ref _channel2, Channel2Min, Channel2Max, c2);
+            SetChannelValue(ref _channel3, Channel3Min, Channel3Max, c3);
+            SetChannelValue(ref _channel4, Channel4Min, Channel4Max, c4);
+            SetChannelValue(ref _channel5, Channel5Min, Channel5Max, c5);
+            SetChannelValue(ref _channel6, _channel6Min, _channel6Max, c6);
         }
 
-        private void SetChannelValue(ref int channel, int c1)
+        public void UpdateMinMaxValues(double c1Min, double c1Max, double c2Min, double c2Max, double c3Min,
+            double c3Max, double c4Min, double c4Max, double c5Min, double c5Max, double c6Min, double c6Max)
         {
-            var newValue = c1 switch
-            {
-                < AnalogMinValue => AnalogMinValue,
-                > AnalogMaxValue => AnalogMaxValue,
-                _ => c1
-            };
-            if (newValue != channel)
-            {
-                channel = newValue;
-                _dataChanged = true;
-            }
+            Channel1Min = c1Min;
+            Channel1Max = c1Max;
+            Channel2Min = c2Min;
+            Channel2Max = c2Max;
+            Channel3Min = c3Min;
+            Channel3Max = c3Max;
+            Channel4Min = c4Min;
+            Channel4Max = c4Max;
+            Channel5Min = c5Min;
+            Channel5Max = c5Max;
+            _channel6Min = c6Min;
+            _channel6Max = c6Max;
+        }
+
+        private void SetChannelValue(ref double channel, double min, double max, double value)
+        {
+            var newValue = value;
+            if (value < min)
+                newValue = min;
+            if (value > max)
+                newValue = max;
+            if (newValue == channel) return;
+            channel = newValue;
+            _dataChanged = true;
         }
 
         #region Public Deklaration
 
-        public int Channel1 => _channel1;
-        public int Channel2 => _channel2;
-        public int Channel3 => _channel3;
-        public int Channel4 => _channel4;
-        public int Channel5 => _channel5;
-        public int Channel6 => _channel6;
+        public double Channel1 => _channel1;
+        public double Channel1Min { get; private set; }
+
+        public double Channel1Max { get; private set; }
+
+        public double Channel2 => _channel2;
+        public double Channel2Min { get; private set; }
+
+        public double Channel2Max { get; private set; }
+
+        public double Channel3 => _channel3;
+        public double Channel3Min { get; private set; }
+
+        public double Channel3Max { get; private set; }
+
+        public double Channel4 => _channel2;
+        public double Channel4Min { get; private set; }
+
+        public double Channel4Max { get; private set; }
+
+        public double Channel5 => _channel3;
+        public double Channel5Min { get; private set; }
+
+        public double Channel5Max { get; private set; }
 
         #endregion
 
@@ -104,23 +156,19 @@ namespace MapQS.Device.Simulator
 
         private I2cBus _bus;
         private I2cDevice _device;
-        private bool _init = true;
+        private bool _init;
         private bool _running;
         private bool _dataChanged;
         private const int AnalogMinValue = 50;
-        private const int AnalogMaxValue = 225;
-        private int _channel1;
-        private int _channel2;
-        private int _channel3;
-        private int _channel4;
-        private int _channel5;
-        private int _channel6;
-        private int _channel7 = 0;
-        private int _channel8 = 0;
-        private int _channel9 = 0;
-        private int _channel10 = 0;
-        private int _channel11 = 0;
-        private int _channel12 = 0;
+        private const int AnalogMaxValue = 218;
+        private double _channel1;
+        private double _channel2;
+        private double _channel3;
+        private double _channel4;
+        private double _channel5;
+        private double _channel6;
+        private double _channel6Min;
+        private double _channel6Max;
 
         #endregion
     }

@@ -30,5 +30,34 @@
                 Value="Transparent" />
         <Setter Property="BorderBrush"
                 Value="Transparent" />
+        <Setter Property="RenderTransform"
+                Value="scale(0.98)" />
+    </Style>
+    <Style Selector="Button.Card:pressed">
+        <Setter Property="RenderTransform"
+                Value="scale(0.95)" />
+    </Style>
+    
+    <Style Selector="Button.None">
+        <Setter Property="Padding"
+                Value="0" />
+        <Setter Property="Background"
+                Value="Transparent" />
+    </Style>
+    <Style Selector="Button.None > avalonia|MaterialIcon">
+        <Setter Property="Padding"
+                Value="0" />
+        <Setter Property="Margin"
+                Value="0" />
+    </Style>
+    <Style Selector="Button.None:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+    </Style>
+    <Style Selector="Button.None:pressed">
+            <Setter Property="RenderTransform"
+                    Value="scale(1)" />
     </Style>
 </Styles>
